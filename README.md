@@ -1,5 +1,5 @@
 # Bubble-Generator
 
-####First Time JavaScript
+#### First Time JavaScript
 
 https://tiffany-dby.github.io/Bubble-Generator/
