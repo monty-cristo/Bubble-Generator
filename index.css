@@ -1,11 +1,13 @@
 body {
-  overflow: hidden;
   min-height: 100vh;
   cursor: crosshair;
-  position: relative;
   margin: 0 auto;
   background: rgb(255, 236, 253);
   user-select: none;
+}
+.content-container {
+  overflow: hidden;
+  position: relative;
 }
 .bubble {
   position: absolute;
