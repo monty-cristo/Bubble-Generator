@@ -1,5 +1,5 @@
 body {
-  min-height: 100vh;
+  height: 100vh;
   cursor: crosshair;
   margin: 0 auto;
   background: rgb(255, 236, 253);
@@ -8,6 +8,7 @@ body {
 .content-container {
   overflow: hidden;
   position: relative;
+  height: 100%;
 }
 .bubble {
   position: absolute;
@@ -28,7 +29,7 @@ body {
 .counter {
   display: flex;
   justify-content: center;
-  height: 90vh;
+  height: 90%;
 }
 h3 {
   display: flex;
@@ -40,7 +41,7 @@ h3 {
   z-index: -1;
 }
 .btn-container {
-  height: 10vh;
+  height: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
