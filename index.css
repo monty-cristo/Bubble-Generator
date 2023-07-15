@@ -4,6 +4,7 @@ body {
   margin: 0 auto;
   background: rgb(255, 236, 253);
   user-select: none;
+  position: relative;
 }
 .content-container {
   overflow: hidden;
