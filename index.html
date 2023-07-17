@@ -3,29 +3,31 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <title>Bubble Generator</title>
-
+  <!-- Fun little fact: did you know that you can make an svg favicon and style it with css? -->
+  <!-- https://web.dev/building-an-adaptive-favicon/ -->
   <link rel="shortcut icon" href="./assets/image/bubbles.png">
   <link rel="stylesheet" href="./index.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-  <div class="content-container">
-    <div class="counter">
-      <h3>0</h3>
-    </div>
-    <div class="btn-container">
-      <div class="buttons">
-        <button id="btnPause" onclick="pause()"><i class="fa-solid fa-pause"></i></button>
-        <button id="btnPlay" onclick="bubbleMaker()"><i class="fa-solid fa-play"></i></button>
-        <button id="btnReset" onclick="reset()"><i class="fa-solid fa-rotate-right"></i></button>
-      </div>
-    </div>
-  </div>
+  <section id="score-section">
+    <h1 id="score">0</h1>
+  </section>
+  <section id="controls-section">
+    <!-- You can ignore this one, I just like putting things in a list if it makes sense -->
+    <ul id="controls">
+      <li><button id="pause"><i class="fa-solid fa-pause"></button></i></li>
+      <li><button id="play"><i class="fa-solid fa-play"></button></i></li>
+      <li><button id="reset"><i class="fa-solid fa-rotate-right"></button></i></li>
+    </ul>
+  </section>
 
-  <script src="./index.js"></script>
+  <!-- You'll be using type module a lot later on. Don't worry about it too much for now -->
+  <!-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules -->
+  <script type="module" src="./index.js"></script>
 </body>
 
 </html>

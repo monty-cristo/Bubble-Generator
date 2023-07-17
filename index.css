@@ -1,90 +1,120 @@
-body {
-  max-height: 100svh;
-  cursor: crosshair;
-  margin: 0 auto;
-  background: rgb(255, 236, 253);
-  user-select: none;
-  position: relative;
+/* My preferred way of handling box sizing but the default one is also just as good */
+/* https://web.dev/learn/css/box-model/ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
-.content-container {
-  overflow: hidden;
-  position: relative;
-  height: 100%;
+
+body,
+h1,
+ul {
+  margin: 0;
 }
-.bubble {
-  position: absolute;
-  border-radius: 300px;
-  background: rgba(255, 166, 0, 0.6);
-  opacity: 0;
-  animation: anim 8s forwards;
-  filter: hue-rotate(0deg);
+
+ul {
+  padding: 0;
+  list-style: none;
 }
-@keyframes anim {
-  to {
-    top: -250px;
-    left: var(--left);
-    opacity: 1;
-    filter: hue-rotate(720deg);
-  }
-}
-.counter {
-  display: flex;
-  justify-content: center;
-  height: 90%;
-}
-h3 {
-  display: flex;
-  justify-content: center;
-  font-size: 10rem;
-  text-align: center;
-  margin: 50px 0 0 0;
-  color: rgba(128, 128, 128, 0.555);
-  z-index: -1;
-}
-.btn-container {
-  height: 10%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-  z-index: 2;
-  background: rgba(255, 236, 253, 0.747);
-  border: solid 1px rgba(128, 128, 128, 0.555);
-  border-radius: 5px;
-}
-.buttons:hover {
-  border: solid 1px rgba(0, 0, 0, 0.5);
-  cursor: default;
-}
-.buttons:hover i {
-  color: rgba(0, 0, 0, 0.5);
-}
+
 button {
+  padding: 0;
   background: none;
   border: none;
   border-radius: 5px;
-  transition: 0.3s ease;
-  height: 40px;
-  width: 40px;
 }
-i {
-  display: flex;
+
+body {
+  min-height: 100vh;
+  cursor: crosshair;
+  /* Fallback color if the next one doesn't work */
+  background: rgb(255, 236, 253);
+  /* Most monitors can actually display more vibrant colors these days than a couple of years ago */
+  /* But if we use rgb, hex codes, etc... we're still telling the browser to display the old muddy colors */
+  /* https://lea.verou.me/2020/04/lch-colors-in-css-what-why-and-how/ */
+  background: lch(100% 30 50);
+  user-select: none;
+  overflow: hidden;
+  display: grid;
+  /* Shorthand for align-content and justify-content */
+  place-content: center;
+  grid-template: 1fr / 1fr;
+}
+
+/* Yeah I'm a grid abuser, got a problem with that? */
+/* This basically stacks all of the sections on top of each other thanks to this code and grid code above in the body */
+/* It's a trick that I learned from these guys (https://www.youtube.com/@keyframers/videos) and have been abusing ever since */
+body>section {
+  grid-area: 1 / 1;
+}
+
+#score-section {
+  display: grid;
+  place-content: center;
+}
+
+#score {
+  font-size: 10rem;
+  /* Too lazy too pick a lch one */
+  color: rgba(128, 128, 128, 0.555);
+  /* We could also make the bubbles spawn in a bubble section and place it in the middle in the html but ¯\_(ツ)_/¯  */
+  z-index: -1;
+}
+
+#controls-section {
+  display: grid;
+  /* Keep in mind that logical properties exist and that you might want to use those in some cases */
+  /* https://web.dev/learn/css/logical-properties/ */
+  padding-bottom: 5vmin;
+  align-content: flex-end;
   justify-content: center;
+}
+
+#controls {
+  width: 90vmin;
+  display: flex;
   align-items: center;
+  justify-content: space-evenly;
+  /* Too lazy too pick a lch one */
+  background: rgba(255, 236, 253, 0.747);
+  /* Too lazy too pick a lch one */
+  border: solid 1px rgba(128, 128, 128, 0.555);
+  border-radius: 5px;
+}
+
+#controls i {
+  display: flex;
+  place-content: center;
   font-size: 1.1rem;
+  /* Too lazy too pick a lch one */
   color: rgba(128, 128, 128, 0.555);
   padding: 10px;
   cursor: pointer;
-  transition: 0.3s ease;
 }
-i:hover {
-  transform: scale(1.25);
-  color: rgba(122, 59, 112, 1) !important;
+
+.bubble {
+  position: absolute;
+  border-radius: 300px;
+  /* Too lazy too pick a lch one */
+  background: rgba(255, 166, 0, 0.6);
+  opacity: 0;
+  animation: ascend 8s forwards;
+  filter: hue-rotate(0deg);
+}
+
+@keyframes ascend {
+  to {
+    opacity: 1;
+    filter: hue-rotate(720deg);
+    /* !!!!!!!!THIS IS ONE IS IMPORTANT!!!!!!!! */
+    /* If you're going to animate the position of elements use transform instead of the position properties */
+    /* Using the position ones causes a lot more layout computations */
+    /* You can check this out in the performance tab or quickly in the rendering tab in chrome */
+    /* Position property one: 144ish(and I have a 144hertz monitor, how weird is that?🤔) layout calculations per second */
+    /* VS */
+    /* Transform translate: 4-8 and only going up to 10 when you pop a lot of bubbles */
+    /* https://web.dev/animations-guide/ */
+    /* https://web.dev/animations-overview/ */
+    translate: var(--x-translation) -100vh;
+  }
 }
